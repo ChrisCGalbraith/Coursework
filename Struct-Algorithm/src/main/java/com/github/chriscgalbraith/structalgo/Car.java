@@ -1,6 +1,6 @@
 package com.github.chriscgalbraith.structalgo;
 
-public class Car {;
+public class Car {
 	public String regi;
 	public String colour;
 	

@@ -10,27 +10,58 @@ public class Dealership {
 		
 	}
 	
+	public class noModelFoundException extends Exception{
+		
+	}
+	
 	private TreeMap<String, TreeMap<String, ArrayList<Car>>> myDoubleTree = new TreeMap<>();
 	String make;
 	String model;
 	Car car;
 	
 	public void addMake(String make) {
-		myDoubleTree.put(make, new TreeMap<>());
-	}
-	
-	public void removeMake(String make) {
 		
+		//Check if the make already exists
+		if(myDoubleTree.containsKey(make)) {
+			System.out.println("That make of car already exists.");
+		}
+		else {
+			myDoubleTree.put(make, new TreeMap<>());
+			System.out.println("Successfuly added" + make + "to the Dealership.");
+		}
 	}
 	
-	public void addCar(String make, String model, Car car) throws noMakeFoundException {
-		if(myDoubleTree.get(make) == null) {
-			
+	
+	public void removeMake(String make) throws noMakeFoundException {
+		
+		//Check if the make exists in the tree
+		if(!myDoubleTree.containsKey(make)) {
 			throw new noMakeFoundException();
-			
 		}
-		myDoubleTree.get(make).get(model).add(car);
+		else {
+			myDoubleTree.remove(make);
+		}
 	}
+	
+	public void addCar(String make, String model, Car car) throws noMakeFoundException, noModelFoundException {
+		
+		// Check if the make of car exists in the system
+		if(!myDoubleTree.containsKey(make)) {
+			System.out.println("The selected make does not exist");
+			throw new noMakeFoundException();
+		} 
+		
+	    // Check if the model of the car exists in the system
+		else if(!myDoubleTree.get(make).containsKey(model)) {
+			System.out.println("The selected model does not exist");
+			throw new noModelFoundException();
+		}
+		
+		else {
+			myDoubleTree.get(make).get(model).add(car);
+	    }
+   }
+	
 	
 	public void displayMakes() {
 		for (Map.Entry<String, TreeMap<String, ArrayList<Car>>> entry : myDoubleTree.entrySet())
