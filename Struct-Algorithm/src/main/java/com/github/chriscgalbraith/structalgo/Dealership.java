@@ -27,7 +27,7 @@ public class Dealership {
 
 		// Check if the make already exists
 		if (myDoubleTree.containsKey(make)) {
-				throw new duplicateMakeException();
+			throw new duplicateMakeException();
 			
 		} else {
 			myDoubleTree.put(make, new TreeMap<>());
@@ -44,19 +44,27 @@ public class Dealership {
 			myDoubleTree.remove(make);
 		}
 	}
+	
+	public void findMake(String make) throws noMakeFoundException {
+		if (!myDoubleTree.containsKey(make)){
+			 throw new noMakeFoundException();
+		}else {
+			System.out.println("The Dealership has this make in stock!");
+		}
+	}
 
 	public void addCar(String make, String model, Car car) throws noMakeFoundException, noModelFoundException {
 
 		// Check if the make of car exists in the system
 		if (!myDoubleTree.containsKey(make)) {
-			System.out.println("The selected make does not exist");
-			throw new noMakeFoundException();
+			//System.out.println("The selected make does not exist");
+			//throw new noMakeFoundException();
 		}
 
 		// Check if the model of the car exists in the system
 		else if (!myDoubleTree.get(make).containsKey(model)) {
-			System.out.println("The selected model does not exist");
-			throw new noModelFoundException();
+			//System.out.println("The selected model does not exist");
+			//throw new noModelFoundException();
 		}
 
 		else {
