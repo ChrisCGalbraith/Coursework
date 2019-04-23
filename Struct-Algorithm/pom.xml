@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.chriscgalbraith</groupId>
-  <artifactId>structalg</artifactId>
+  <artifactId>structalgo</artifactId>
   <version>1.0</version>
   <packaging>jar</packaging>
 
-  <name>xstructalg</name>
+  <name>structalgo</name>
   <url>http://maven.apache.org</url>
 
   <properties>
