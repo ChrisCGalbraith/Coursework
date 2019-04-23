@@ -1,4 +1,4 @@
-package com.github.chriscgalbraith.structalg;
+package com.github.chriscgalbraith.structalgo;
 import java.io.*;
 
 public class Input {

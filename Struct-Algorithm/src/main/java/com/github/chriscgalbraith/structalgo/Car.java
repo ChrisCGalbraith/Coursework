@@ -1,4 +1,4 @@
-package com.github.chriscgalbraith.structalg;
+package com.github.chriscgalbraith.structalgo;
 
 public class Car {;
 	public String regi;

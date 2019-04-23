@@ -1,4 +1,4 @@
-package com.github.chriscgalbraith.structalg;
+package com.github.chriscgalbraith.structalgo;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
