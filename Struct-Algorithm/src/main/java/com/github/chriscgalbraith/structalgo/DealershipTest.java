@@ -7,14 +7,18 @@ public class DealershipTest {
 
 	public static void main(String[] args) {
 		Dealership dealership = new Dealership();
-		Integer option;
+		Integer option = -2;
 		do {
 			System.out.println("0: Quit.");
 			System.out.println("1: Add a new make of car to the Dealership.");
 			System.out.println("2: Display makes of car available."); 
 			System.out.println("3: Remove a make of car from the Dealership.");
 			System.out.println("4: Find if a particular make is held by the Dealership.");
-			option = Input.getInteger("option: ");
+			try{
+				option = Input.getInteger("Option: ");
+			} catch(NumberFormatException e2){
+				System.out.println("Not a valid input, please enter a number.");
+			}
 			switch (option) {
 			case 0:
 				System.out.println("Are you sure you want to quit?");
@@ -51,10 +55,10 @@ public class DealershipTest {
 				}
 				break;
 			default:
-				System.out.println("invalid option");
+				System.out.println("Returning to main menu");
+				option = -2;
 			}
-		} while (option != -1);
-
+		}while (option != -1);
 	}
 
 }
