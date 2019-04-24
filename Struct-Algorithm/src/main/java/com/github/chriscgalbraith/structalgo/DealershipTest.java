@@ -17,7 +17,13 @@ public class DealershipTest {
 			option = Input.getInteger("option: ");
 			switch (option) {
 			case 0:
-				System.out.println("quitting program");
+				System.out.println("Are you sure you want to quit?");
+				String choice = Input.getString("Press y to quit or anything else to remain.");
+				if(!choice.equals("y")) {
+					break;
+				}else {
+					option = -1;
+				}
 				break;
 			case 1:
 				try {
@@ -47,7 +53,8 @@ public class DealershipTest {
 			default:
 				System.out.println("invalid option");
 			}
-		} while (option != 0);
+		} while (option != -1);
 
 	}
+
 }

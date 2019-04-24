@@ -29,11 +29,14 @@ public class Dealership {
 		if (myDoubleTree.containsKey(make)) {
 			throw new duplicateMakeException();
 			
-		} else {
-			myDoubleTree.put(make, new TreeMap<>());
-			System.out.println("Successfuly added " + make + " to the Dealership.");
+		} else if(make == "") {
+				System.out.println("No input detected.");
+			}
+			else {
+				myDoubleTree.put(make, new TreeMap<>());
+				System.out.println("Successfuly added " + make + " to the Dealership.");
+			}
 		}
-	}
 	
 	public void removeMake(String make) throws noMakeFoundException {
 
@@ -42,6 +45,7 @@ public class Dealership {
 			throw new noMakeFoundException();
 		} else {
 			myDoubleTree.remove(make);
+			System.out.println("Successfully removed " + make + " from the Dealership.");
 		}
 	}
 	
