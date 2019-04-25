@@ -70,3 +70,5 @@ public class DealershipTest {
 	}
 
 }
+//dealership.addModel(Input.getString("enter make to add model to"), Input.getString("Enter the model of the car"));
+//dealership.addCar(new Car(Input.getString("Enter regi plate: "), Input.getString("Enter colour of car: ")));
