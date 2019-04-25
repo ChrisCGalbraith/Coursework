@@ -1,13 +1,15 @@
 package com.github.chriscgalbraith.structalgo;
 
 import com.github.chriscgalbraith.structalgo.Dealership.duplicateMakeException;
-import com.github.chriscgalbraith.structalgo.Dealership.noMakeFoundException;
-import com.github.chriscgalbraith.structalgo.Dealership.noModelFoundException;
+
+import com.github.chriscgalbraith.structalgo.Dealership.NoMakeFoundException;
+import com.github.chriscgalbraith.structalgo.Dealership.NoModelFoundException;
 
 public class DealershipTest {
-
-	public static void main(String[] args) throws noMakeFoundException, noModelFoundException {
-		Dealership dealership = new Dealership();
+	
+	private static Dealership dealership = new Dealership();
+	
+	public static void main(String[] args) {
 		Integer option = -2;
 		do {
 			System.out.println("0: Quit.");
@@ -15,7 +17,9 @@ public class DealershipTest {
 			System.out.println("2: Display makes of car available."); 
 			System.out.println("3: Remove a make of car from the Dealership.");
 			System.out.println("4: Find if a particular make is held by the Dealership.");
-			System.out.println("5: Add a Car to an existing Make within the Dealership.");
+			System.out.println("5: Display models of car available.");
+			System.out.println("6: Add a new Car to the Dealership");
+			System.out.println("7: Remove a Car from the Dealership");
 			try{
 				option = Input.getInteger("Option: ");
 			} catch(NumberFormatException e2){
@@ -28,9 +32,8 @@ public class DealershipTest {
 				if(!choice.equals("y")) {
 					break;
 				}else {
-					option = -1;
+					return;
 				}
-				break;
 			case 1:
 				try {
 					dealership.addMake(Input.getString("Enter the make of car to add to the Dealership"));
@@ -39,36 +42,48 @@ public class DealershipTest {
 				}
 				break;
 			case 2:
-				dealership.displayMakes();
+					dealership.displayMakes();
 				break;
 			case 3:
-				try {         // Try to remove make, if doesnt exist, handles exception and returns to top
 					dealership.removeMake(Input.getString("Enter the make to remove from the system"));
-				} 
-				catch (noMakeFoundException e) {
-					System.out.println("Exception: The make does not exist! Going back to main menu.");	
-				}
 				break;
 			case 4:
-				try {
 					dealership.findMake(Input.getString("What make are you looking to find?: "));
-				} catch (noMakeFoundException e) {
-					System.out.println("The Dealership does not currently hold that make.");
-				}
 				break;
 			case 5:
-				//try {
-				dealership.addModel(Input.getString("enter make to add model to"), Input.getString("Enter the model of the car"));
-				dealership.addCar(new Car(Input.getString("Enter regi plate: "), Input.getString("Enter colour of car: ")));
-				//}catch()
+					dealership.displayModels();
 				break;
+			case 6:
+				try {
+					handleAddCar();
+				} catch (Exception e) {
+					System.out.println("An exception was caught, but lets be nonspecific about it right?");
+				}
+				break;
+			case 7:
+					dealership.removeCar(Input.getString("Regi plate to remove:"));
+					break;
+			case 8:
+					dealership.displayNumberCarsByMakeAndModel(Input.getString("Choose make of cars:"), Input.getString("Choose model of cars:"));
 			default:
 				System.out.println("Invalid input, returning to main menu.");
 				option = -2;
 			}
 		}while (option != -1);
 	}
-
+	
+	public static void handleAddCar() throws NoModelFoundException, NoMakeFoundException {
+		String make;
+		String model;
+		make = Input.getString("Enter the make to add a car of ");
+		model = Input.getString("Enter the model of the car ");
+		if(dealership.findMake(make)) {
+				dealership.addCar(make, model, new Car(Input.getString("Enter the regi-number: "), Input.getString("Enter the colour of the car: ")));
+		}else {
+			return;	
+		}
+	}	
 }
-//dealership.addModel(Input.getString("enter make to add model to"), Input.getString("Enter the model of the car"));
-//dealership.addCar(new Car(Input.getString("Enter regi plate: "), Input.getString("Enter colour of car: ")));
+
+
+
