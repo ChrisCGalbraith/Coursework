@@ -57,21 +57,21 @@ public class Dealership {
 		}
 	}
 
-	public void addCar(String make, String model, Car car) throws noMakeFoundException, noModelFoundException {
-
-		// Check if the make of car exists in the system
-		if (!myDoubleTree.containsKey(make)) {
-			//System.out.println("The selected make does not exist");
-			//throw new noMakeFoundException();
+	public void addCar(Car car) throws noMakeFoundException, noModelFoundException {
+		 //Check if the make of car exists in the system
+		if (!myDoubleTree.get(make).containsKey(make)) {
+			System.out.println("The selected make does not exist");
+			throw new noMakeFoundException();
 		}
 
 		// Check if the model of the car exists in the system
 		else if (!myDoubleTree.get(make).containsKey(model)) {
-			//System.out.println("The selected model does not exist");
-			//throw new noModelFoundException();
+			System.out.println("The selected model does not exist");
+			throw new noModelFoundException();
 		}
 
 		else {
+			//myDoubleTree.get(make).put(model, new ArrayList<>());
 			myDoubleTree.get(make).get(model).add(car);
 		}
 	}
@@ -82,7 +82,11 @@ public class Dealership {
 		}
 		else 
 			for (Map.Entry<String, TreeMap<String, ArrayList<Car>>> entry : myDoubleTree.entrySet()) {
-			System.out.println(entry.getKey());
+			System.out.println(entry.getValue());
 		}
+	}
+	
+	public void addModel(String make, String model) {
+		myDoubleTree.get(make).put(model, new ArrayList<Car>());
 	}
 }
