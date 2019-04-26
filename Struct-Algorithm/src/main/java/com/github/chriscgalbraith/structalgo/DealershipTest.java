@@ -75,10 +75,14 @@ public class DealershipTest {
 	public static void handleAddCar() throws NoModelFoundException, NoMakeFoundException {
 		String make;
 		String model;
+		String regi;
 		make = Input.getString("Enter the make to add a car of ");
-		model = Input.getString("Enter the model of the car ");
 		if(dealership.findMake(make)) {
-				dealership.addCar(make, model, new Car(Input.getString("Enter the regi-number: "), Input.getString("Enter the colour of the car: ")));
+			model = Input.getString("Enter the model of the car ");
+			System.out.println("Need to check if the car already exists in the Dealership. \nPlease enter the regi-number.");
+			regi = Input.getString("Regi number: ");
+			if(dealership.checkRegi(regi))
+				dealership.addCar(make, model, new Car(regi, Input.getString("Enter the colour of the car: ")));
 		}else {
 			return;	
 		}

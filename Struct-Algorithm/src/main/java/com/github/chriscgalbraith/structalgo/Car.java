@@ -17,7 +17,7 @@ public class Car {
 		return colour;
 	}
 	
-	// toString is called in the println printstream
+	@Override
 	public String toString() {
 		return "Regi:" +  this.regi + " Colour: " + this.colour + "]"; 
 	}

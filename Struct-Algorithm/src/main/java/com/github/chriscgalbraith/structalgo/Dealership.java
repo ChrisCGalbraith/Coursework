@@ -67,22 +67,23 @@ public class Dealership {
 		}
 		return false;
 	}
-
+    // Checks if the model of car (fiesta, punto etc) exists and if it does not, adds the model. Then adds the car details to that.
 	public void addCar(String make, String model, Car car) throws NoMakeFoundException, NoModelFoundException {
 		 //Check if the make of car exists in the system
 		if (!myDoubleTree.containsKey(make)) {
 			System.out.println("The selected make does not exist");
 			throw new NoMakeFoundException();
 		}
-
 		 //Check if the model of the car exists in the system
 	    if (!myDoubleTree.get(make).containsKey(model)) {
 			addModel(make, model);			
-		}
-			myDoubleTree.get(make).get(model).add(car);
-			System.out.println("Car successfully added.");
+		}			
+		myDoubleTree.get(make).get(model).add(car);
+		System.out.println("Car successfully added.");
 	}
-	
+	    
+			
+	 	
 	// Cars must have a unique regi plate, so cars can be identified by this. Loop through all Makes then Models and get the value 
 	// Loop through all Makes then Models and get the Value which corresponds to a Car object.
 	public void removeCar(String regi) {
@@ -93,10 +94,10 @@ public class Dealership {
 						if(cars.get(i).regi.equals(regi)) {
 							cars.remove(i);
 							System.out.println("Car Removed. \nThis is the remaining inventory of cars in the Dealership: ");
-							displayModels(); //change for displayAll when complete.
-					}						//change for displayAll when complete.!!!!!!!!!!!!!
-				}								//change for displayAll when complete.!!!!!!!!!!!!!!!!!!
-			}// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+							displayModels(); 
+					}
+				}			
+			}
 		}
 	}
 	public void displayMakes() {
@@ -138,15 +139,27 @@ public class Dealership {
 		int number = myDoubleTree.get(make).get(model).size();
 		System.out.println("Number of " + make + " " + model + " = " + number);
 	}
+	
+	public void createArrayList() {
+		for (Map.Entry<String, TreeMap<String, ArrayList<Car>>> entry : myDoubleTree.entrySet()) {
+			for (Map.Entry<String, ArrayList<Car>> entry1 : entry.getValue().entrySet()) {
+					ArrayList<Car> cars = entry1.getValue();
+			}
+		}
+	}
+	
+	public boolean checkRegi(String regi) {
+		for (Map.Entry<String, TreeMap<String, ArrayList<Car>>> entry : myDoubleTree.entrySet()) {
+			for (Map.Entry<String, ArrayList<Car>> entry1 : entry.getValue().entrySet()) {
+					ArrayList<Car> cars = entry1.getValue();
+					for (int i = 0; i < cars.size(); i++) {
+						if(cars.get(i).regi.equals(regi)) {
+							System.out.println("This car already exists in the Dealership.");
+							return false;
+					 }	
+				}
+			}	
+		}
+		return true;
+	}
 }
-
-/*for (Car c : myDoubleTree.get(make).get(model)) 
-//if(c.regi == regi) {
-String str = "";
-Iterator itr = myDoubleTree.get(make).get(model).iterator();		
-while (itr.hasNext()) {
-str = (String) itr.next();
-if(str.equals(regi)) {
-	itr.remove();
-	System.out.println("Removed car with regi " + regi + "from the Dealership.");
-	break; */
